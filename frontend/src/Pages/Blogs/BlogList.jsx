@@ -45,7 +45,7 @@ const BlogList = () => {
               <div className="card h-100 shadow-sm">
                 {blog.image && (
                   <img
-                    src={`http://localhost:5000${blog.image}`}
+                    src={`${import.meta.env.VITE_API_URL}${blog.image}`}
                     alt={blog.title}
                     className="card-img-top"
                     style={{ height: "200px", objectFit: "cover" }}

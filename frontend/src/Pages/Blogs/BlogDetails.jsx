@@ -95,7 +95,7 @@ const BlogDetails = () => {
 
         {blog.image && (
           <img
-            src={`http://localhost:5000${blog.image}`}
+            src={`${import.meta.env.VITE_API_URL}${blog.image}`}
             alt={blog.title}
             className="img-fluid rounded mb-3"
             style={{ maxHeight: "400px", objectFit: "cover" }}
