@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlogs, deleteBlog } from "../../Redux/slices/blogSlice";
+import { fetchBlogs, deleteBlog } from "../../Redux/slices/BlogSlice";
 import { useNavigate } from "react-router-dom";
 
 const BlogList = () => {

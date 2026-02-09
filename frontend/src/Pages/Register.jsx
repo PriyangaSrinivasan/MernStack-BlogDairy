@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BubbleBackground from "../Components/Bubblebg";
-import { registerUser } from "../Redux/slices/authSlice";
+import { registerUser } from "../Redux/slices/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";

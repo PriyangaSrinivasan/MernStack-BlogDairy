@@ -1,7 +1,7 @@
 // src/Components/CreateBlog.jsx
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlog } from "../../Redux/slices/blogSlice";
+import { createBlog } from "../../Redux/slices/BlogSlice";
 import img from "../../assets/images1.png";
 const CreateBlog = () => {
   const dispatch = useDispatch();

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import BubbleBackground from "../Components/Bubblebg";
-import { loginUser } from "../Redux/slices/authSlice"; // ✅ Use loginUser here
+import { loginUser } from "../Redux/slices/AuthSlice"; // ✅ Use loginUser here
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";

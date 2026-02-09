@@ -4,7 +4,7 @@ import logo from "../assets/logo2.png";
 import Loader from "./Loader";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout } from "../Redux/slices/authSlice";
+import { logout } from "../Redux/slices/AuthSlice";
 import { motion } from "framer-motion";
 
 const Navbar = () => {

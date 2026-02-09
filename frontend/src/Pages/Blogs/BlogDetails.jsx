@@ -8,14 +8,18 @@ import {
   addComment,
   editComment,
   deleteComment,
-} from "../../Redux/slices/blogSlice";
+} from "../../Redux/slices/BlogSlice";
 
 const BlogDetails = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { singleBlog: blog, loading, error } = useSelector((state) => state.blogs);
+  const {
+    singleBlog: blog,
+    loading,
+    error,
+  } = useSelector((state) => state.blogs);
   const { user, token } = useSelector((state) => state.auth);
 
   const [commentText, setCommentText] = useState("");
@@ -32,11 +36,10 @@ const BlogDetails = () => {
   if (!blog) return <div className="text-center mt-4">No blog found.</div>;
 
   // ✅ Ownership check (works for Google & normal signup users)
-const isOwner =
-  user &&
-  (user.role === "admin" ||
-    String(user._id || user.id) === String(blog.author?._id || blog.author));
-
+  const isOwner =
+    user &&
+    (user.role === "admin" ||
+      String(user._id || user.id) === String(blog.author?._id || blog.author));
 
   // Blog actions
   const handleEditBlog = () => navigate(`/editblog/${blog._id}`);
@@ -75,7 +78,7 @@ const isOwner =
         blogId: blog._id,
         commentId: editingCommentId,
         text: editingCommentText,
-      })
+      }),
     );
     cancelEditComment();
   };
@@ -132,11 +135,10 @@ const isOwner =
         <h5>Comments ({blog.comments?.length || 0})</h5>
         <ul className="list-group mb-3">
           {blog.comments?.map((c) => {
-        const isCommentOwner =
+            const isCommentOwner =
               user &&
               (user.role === "admin" ||
                 String(user._id || user.id) === String(c.user?._id || c.user));
-
 
             return (
               <li
