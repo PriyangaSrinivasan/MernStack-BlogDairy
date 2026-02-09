@@ -1,0 +1,108 @@
+import React from 'react';
+import styled from 'styled-components';
+
+const Loader = () => {
+  return (
+    <Overlay>
+      <StyledWrapper>
+        <div id="container">
+          <label className="loading-title">Loading ...</label>
+          <span className="loading-circle sp1">
+            <span className="loading-circle sp2">
+              <span className="loading-circle sp3" />
+            </span>
+          </span>
+        </div>
+      </StyledWrapper>
+    </Overlay>
+  );
+}
+
+export default Loader;
+
+// Full screen overlay
+const Overlay = styled.div`
+  position: fixed;
+  inset: 0; /* top:0; bottom:0; left:0; right:0 */
+  background: rgba(255, 255, 255, 0.8); /* semi-transparent white */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* ensure it appears above everything */
+`;
+
+const StyledWrapper = styled.div`
+  #container {
+    width: 100px;
+    height: 125px;
+    margin: auto auto;
+  }
+
+  .loading-title {
+    display: block;
+    text-align: center;
+    font-size: 20px; /* added px */
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    padding-bottom: 15px;
+    color: #888;
+  }
+
+  .loading-circle {
+    display: block;
+    border-left: 5px solid;
+    border-top-left-radius: 100%;
+    border-top: 5px solid;
+    margin: 5px;
+    animation-name: Loader_611;
+    animation-duration: 1500ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-fill-mode: forwards;
+  }
+
+  .sp1 {
+    border-left-color: #F44336;
+    border-top-color: #F44336;
+    width: 40px;
+    height: 40px;
+  }
+
+  .sp2 {
+    border-left-color: #FFC107;
+    border-top-color: #FFC107;
+    width: 30px;
+    height: 30px;
+  }
+
+  .sp3 {
+    width: 20px;
+    height: 20px;
+    border-left-color: #8bc34a;
+    border-top-color: #8bc34a;
+  }
+
+  @keyframes Loader_611 {
+    0% {
+      transform: rotate(0deg);
+      transform-origin: right bottom;
+    }
+    25% {
+      transform: rotate(90deg);
+      transform-origin: right bottom;
+    }
+    50% {
+      transform: rotate(180deg);
+      transform-origin: right bottom;
+    }
+    75% {
+      transform: rotate(270deg);
+      transform-origin: right bottom;
+    }
+    100% {
+      transform: rotate(360deg);
+      transform-origin: right bottom;
+    }
+  }
+`;

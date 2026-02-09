@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Berkshire+Swash&family=Epilogue:ital,wght@0,100..900;1,100..900&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Tapestry&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Tapestry", serif;
+}
+html,body{
+     margin: 0;
+    padding: 0; 
+}
+/* .navbar{
+background-image: radial-gradient(circle at bottom right, rgb(4, 128, 235) 0%, rgb(4, 128, 235) 4%,rgb(4, 108, 199) 4%, rgb(4, 108, 199) 8%,rgb(5, 89, 163) 8%, rgb(5, 89, 163) 12%,rgb(5, 69, 127) 12%, rgb(5, 69, 127) 16%,rgb(5, 49, 91) 16%, rgb(5, 49, 91) 20%,rgb(6, 30, 55) 20%, rgb(6, 30, 55) 24%,transparent 24%, transparent 100%),radial-gradient(circle at bottom left, rgb(4, 128, 235) 0%, rgb(4, 128, 235) 4%,rgb(4, 108, 199) 4%, rgb(4, 108, 199) 8%,rgb(5, 89, 163) 8%, rgb(5, 89, 163) 12%,rgb(5, 69, 127) 12%, rgb(5, 69, 127) 16%,rgb(5, 49, 91) 16%, rgb(5, 49, 91) 20%,rgb(6, 30, 55) 20%, rgb(6, 30, 55) 24%,rgb(10,12,32) 24%, rgb(10,12,32) 100%);
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+} */
+.navbar{
+  
+  background-image: radial-gradient(circle at bottom right, rgba(4,165,235, 0.92) 0%, rgba(4,165,235, 0.92) 4%,rgba(4,141,199, 0.96) 4%, rgba(4,141,199, 0.96) 8%,rgba(5,117,163, 0.95) 8%, rgba(5,117,163, 0.95) 12%,rgba(5,92,127, 0.96) 12%, rgba(5,92,127, 0.96) 16%,rgba(5,70,91, 0.96) 16%, rgba(5,70,91, 0.96) 20%,rgba(6,44,55, 0.96) 20%, rgba(6,44,55, 0.96) 24%,transparent 24%, transparent 100%),radial-gradient(circle at bottom left, rgba(4,165,235, 0.92) 0%, rgba(4,165,235, 0.92) 4%,rgba(4,141,199, 0.96) 4%, rgba(4,141,199, 0.96) 8%,rgba(5,117,163, 0.95) 8%, rgba(5,117,163, 0.95) 12%,rgba(5,92,127, 0.96) 12%, rgba(5,92,127, 0.96) 16%,rgba(5,70,91, 0.96) 16%, rgba(5,70,91, 0.96) 20%,rgba(6,44,55, 0.96) 20%, rgba(6,44,55, 0.96) 24%,rgb(6, 10, 19) 24%, rgb(6, 10, 19) 100%);
+ padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+}
+.create-blog-page{
+ background-image: radial-gradient(circle at 90% 24%, rgba(209, 209, 209,0.04) 0%, rgba(209, 209, 209,0.04) 50%,rgba(160, 160, 160,0.04) 50%, rgba(160, 160, 160,0.04) 100%),radial-gradient(circle at 91% 63%, rgba(45, 45, 45,0.04) 0%, rgba(45, 45, 45,0.04) 50%,rgba(87, 87, 87,0.04) 50%, rgba(87, 87, 87,0.04) 100%),radial-gradient(circle at 17% 2%, rgba(124, 124, 124,0.04) 0%, rgba(124, 124, 124,0.04) 50%,rgba(117, 117, 117,0.04) 50%, rgba(117, 117, 117,0.04) 100%),linear-gradient(88deg, rgb(5,5,51),rgb(1, 15, 13));
+}
+
+.create-blog{
+  background-image: url("assets/img2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.9;
+
+}
+.create-blog input {
+  background-color: transparent;
+  border:2px solid#c8d3eb
+}
+.create-blog textarea {
+  background-color: transparent;
+   border:2px solid#c8d3eb
+}
+/* ------------------------------
+  BACKGROUND + GRADIENT MOVEMENT
+-------------------------------- */
+.bg-blobs {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+
+  background: linear-gradient(130deg, #050529, #020713, #080a28);
+  background-size: 300% 300%;
+  animation: gradientShift 14s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 0%; }
+  50% { background-position: 100% 100%; }
+  100% { background-position: 0% 0%; }
+}
+
+/* ------------------------------------
+  GLOW BLOB BASE STYLE
+------------------------------------- */
+.blob {
+  position: absolute;
+  width: 450px;
+  height: 450px;
+  border-radius: 50%;
+  filter: blur(140px);
+  opacity: 0.65;
+  animation: blobFloat 15s infinite ease-in-out alternate;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+@keyframes blobFloat {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(80px, -60px) scale(1.25); }
+  100% { transform: translate(-70px, 90px) scale(0.9); }
+}
+
+.my-btn{
+  padding: 8px 18px;
+  font-size: 14px;
+  width:fit-content
+}
+
+.contact{
+  background-image: url("../src/assets/cont1.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.contact-card{
+  background-color: rgb(0, 221, 255) ;
+  opacity: 0.8;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  input{
+    background-color: transparent;
+      border:2px solid#c8d3eb;
+      
+  }
+  textarea{
+    background-color: transparent;
+      border:2px solid#c8d3eb
+  }
+}
