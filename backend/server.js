@@ -21,7 +21,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin:  "http://localhost:5173", // allow both dev ports
+    origin:  ["http://localhost:5173","https://blogdiary.netlify.app"], // allow both dev ports
     credentials: true,
   })
 );
