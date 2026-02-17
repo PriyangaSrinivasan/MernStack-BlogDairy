@@ -154,7 +154,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlogById, updateBlog } from "../../Redux/slices/blogSlice";
+import { fetchBlogById, updateBlog } from "../../Redux/slices/BlogSlice";
 
 const EditBlog = () => {
   const { id } = useParams();
@@ -304,7 +304,11 @@ const EditBlog = () => {
               <img
                 src={previewImage}
                 alt="Preview"
-                style={{ width: "100%", maxHeight: "300px", objectFit: "cover" }}
+                style={{
+                  width: "100%",
+                  maxHeight: "300px",
+                  objectFit: "cover",
+                }}
               />
             </div>
           )}

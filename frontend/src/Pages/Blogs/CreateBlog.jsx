@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createBlog } from "../../Redux/slices/blogSlice";
+import { createBlog } from "../../Redux/slices/BlogSlice";
 import img from "../../assets/images1.png";
 
 const CreateBlog = () => {
@@ -45,7 +45,10 @@ const CreateBlog = () => {
   };
 
   return (
-    <div className="create-blog-page d-flex justify-content-center align-items-center" style={{ minHeight: "100vh" }}>
+    <div
+      className="create-blog-page d-flex justify-content-center align-items-center"
+      style={{ minHeight: "100vh" }}
+    >
       <div className="container position-relative">
         <img
           src={img}
@@ -53,7 +56,10 @@ const CreateBlog = () => {
           className="position-absolute"
           style={{ top: "-40%", right: "5%", opacity: "0.6" }}
         />
-        <div className="card p-4 mx-auto border-2 py-5" style={{ maxWidth: "700px", position: "relative", zIndex: 10 }}>
+        <div
+          className="card p-4 mx-auto border-2 py-5"
+          style={{ maxWidth: "700px", position: "relative", zIndex: 10 }}
+        >
           <h3 className="text-center mb-3">📝 Create Blog</h3>
           <form onSubmit={handleSubmit} className="border-1">
             <input
@@ -101,7 +107,11 @@ const CreateBlog = () => {
               <option value="Business">Business</option>
             </select>
 
-            <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+            <button
+              type="submit"
+              className="btn btn-primary w-100"
+              disabled={loading}
+            >
               {loading ? "Creating..." : "Create Blog"}
             </button>
           </form>
@@ -113,4 +123,3 @@ const CreateBlog = () => {
 };
 
 export default CreateBlog;
-

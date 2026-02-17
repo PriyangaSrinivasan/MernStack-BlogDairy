@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlogs, deleteBlog } from "../../Redux/slices/blogSlice";
+import { fetchBlogs, deleteBlog } from "../../Redux/slices/BlogSlice";
 import { useNavigate } from "react-router-dom";
 
 const BlogList = () => {
@@ -22,7 +22,7 @@ const BlogList = () => {
   // Ownership check
   const isOwner = (blog) => {
     const authorId = blog.author?._id || blog.author;
-    const userId = user?._id || user?.id; 
+    const userId = user?._id || user?.id;
     return (
       user && (user.role === "admin" || String(userId) === String(authorId))
     );
@@ -36,14 +36,11 @@ const BlogList = () => {
       <h2 className="text-center mb-4">📰 All Blogs</h2>
       <div className="row g-4">
         {blogs.length === 0 && <p className="text-center">No blogs found.</p>}
-        
+
         {blogs.map((blog) => (
-
           <div className="col-md-4" key={blog._id}>
-
             <div className="card h-100 shadow-sm">
-
-            {blog.image && (
+              {blog.image && (
                 <img
                   src={blog.image}
                   alt={blog.title}
@@ -56,7 +53,6 @@ const BlogList = () => {
                 <h5 className="card-title">{blog.title}</h5>
                 <p className="card-text text-truncate">{blog.content}</p>
                 <div className="mt-auto d-flex justify-content-between">
-                  
                   <button
                     className="btn btn-outline-primary btn-sm"
                     onClick={() => navigate(`/blogs/${blog._id}`)}
@@ -79,7 +75,6 @@ const BlogList = () => {
                       >
                         🗑 Delete
                       </button>
-
                     </div>
                   )}
                 </div>

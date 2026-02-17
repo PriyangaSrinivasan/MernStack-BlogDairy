@@ -2,7 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 
 // Import slices with exact casing
 import authReducer from "./slices/AuthSlice";
-import blogReducer from "./slices/blogSlice";
+import blogReducer from "./slices/BlogSlice";
 
 const store = configureStore({
   reducer: {
