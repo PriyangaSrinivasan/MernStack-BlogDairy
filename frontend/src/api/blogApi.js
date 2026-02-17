@@ -7,9 +7,9 @@ export const createBlogApi = (formData, token) =>
   axios.post(API_BLOG, formData, {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": "multipart/form-data",
     },
   });
+
 
 // Get all blogs
 export const getBlogsApi = () => axios.get(API_BLOG);
@@ -18,13 +18,13 @@ export const getBlogsApi = () => axios.get(API_BLOG);
 export const getBlogByIdApi = (id) => axios.get(`${API_BLOG}/${id}`);
 
 // Update blog (file upload optional)
-export const updateBlogApi = (id, data, token, isFileUpload = false) =>
+export const updateBlogApi = (id, data, token) =>
   axios.put(`${API_BLOG}/${id}`, data, {
     headers: {
       Authorization: `Bearer ${token}`,
-      "Content-Type": isFileUpload ? "multipart/form-data" : "application/json",
     },
   });
+
 
 // Delete blog
 export const deleteBlogApi = (id, token) =>

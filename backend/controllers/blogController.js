@@ -74,31 +74,46 @@ const getBlogById = async (req, res) => {
 
       
            // Update Blog
-const updateBlog = async(req,res)=>{
-    try {
-       const blog =await Blog.findById(req.params.id);
-       if(!blog) return res.status(404).json({message:"Blog not found"});
-       
-     if (
-            req.user.role !== "admin" &&
-            String(blog.author._id || blog.author) !== String(req.user._id)
-        ) {
-          return res.status(403).json({ message: "Not authorized" });
-        }
+// Update Blog
+const updateBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
 
-
-       blog.title = req.body.title || blog.title;
-       blog.content = req.body.content || blog.content;
-       blog.image = req.body.image || blog.image;
-       blog.category= req.body.category || blog.category;
-       
-       const updateBlog = await blog.save();
-       res.status(200).json(updateBlog)
-
-    } catch (error) {
-        res.status(500).json({message:"Server error"})
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
     }
+
+    // 🔥 Safely extract author ID
+    const authorId = blog.author._id
+      ? blog.author._id.toString()
+      : blog.author.toString();
+
+    const userId = req.user._id.toString();
+
+    // 🔐 Authorization check
+    if (req.user.role !== "admin" && authorId !== userId) {
+      return res.status(403).json({ message: "Not authorized" });
+    }
+
+    // 📝 Update fields
+    blog.title = req.body.title || blog.title;
+    blog.content = req.body.content || blog.content;
+    blog.category = req.body.category || blog.category;
+
+    // 📷 If new image uploaded (Cloudinary)
+    if (req.file) {
+      blog.image = req.file.path;
+    }
+
+    const updatedBlog = await blog.save();
+
+    res.status(200).json(updatedBlog);
+  } catch (error) {
+    console.error("Update Blog Error:", error.message);
+    res.status(500).json({ message: "Server error" });
+  }
 };
+
  
                      // Delete Blog
 const deleteBlog = async(req,res)=>{
