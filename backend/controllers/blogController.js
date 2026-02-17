@@ -79,9 +79,13 @@ const updateBlog = async(req,res)=>{
        const blog =await Blog.findById(req.params.id);
        if(!blog) return res.status(404).json({message:"Blog not found"});
        
-       if(req.user.role !== "admin" && blog.author.toString() !==req.user._id.toString()){
-        return res.status(403).json({message:"Not authorized"})
-       }
+     if (
+            req.user.role !== "admin" &&
+            String(blog.author._id || blog.author) !== String(req.user._id)
+        ) {
+          return res.status(403).json({ message: "Not authorized" });
+        }
+
 
        blog.title = req.body.title || blog.title;
        blog.content = req.body.content || blog.content;
