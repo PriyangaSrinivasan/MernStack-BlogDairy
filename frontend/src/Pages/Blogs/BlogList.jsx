@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchBlogs, deleteBlog } from "../../Redux/slices/BlogSlice";
+import { fetchBlogs, deleteBlog } from "../../Redux/slices/blogSlice";
 import { useNavigate } from "react-router-dom";
 
 const BlogList = () => {
@@ -22,7 +22,7 @@ const BlogList = () => {
   // Ownership check
   const isOwner = (blog) => {
     const authorId = blog.author?._id || blog.author;
-    const userId = user?._id || user?.id; // fallback for Google or signup user
+    const userId = user?._id || user?.id; 
     return (
       user && (user.role === "admin" || String(userId) === String(authorId))
     );
@@ -36,53 +36,57 @@ const BlogList = () => {
       <h2 className="text-center mb-4">📰 All Blogs</h2>
       <div className="row g-4">
         {blogs.length === 0 && <p className="text-center">No blogs found.</p>}
-        {blogs.map((blog) => {
-          console.log("Blog author:", blog.author);
-          console.log("Logged in user:", user);
+        
+        {blogs.map((blog) => (
 
-          return (
-            <div className="col-md-4" key={blog._id}>
-              <div className="card h-100 shadow-sm">
-                {blog.image && (
-                  <img
-                    src={`${import.meta.env.VITE_API_URL}${blog.image}`}
-                    alt={blog.title}
-                    className="card-img-top"
-                    style={{ height: "200px", objectFit: "cover" }}
-                  />
-                )}
-                <div className="card-body d-flex flex-column">
-                  <h5 className="card-title">{blog.title}</h5>
-                  <p className="card-text text-truncate">{blog.content}</p>
-                  <div className="mt-auto d-flex justify-content-between">
-                    <button
-                      className="btn btn-outline-primary btn-sm"
-                      onClick={() => navigate(`/blogs/${blog._id}`)}
-                    >
-                      👁 View
-                    </button>
-                    {isOwner(blog) && (
-                      <div>
-                        <button
-                          className="btn btn-outline-success btn-sm me-2"
-                          onClick={() => navigate(`/editblog/${blog._id}`)}
-                        >
-                          ✏️ Edit
-                        </button>
-                        <button
-                          className="btn btn-outline-danger btn-sm"
-                          onClick={() => handleDelete(blog._id)}
-                        >
-                          🗑 Delete
-                        </button>
-                      </div>
-                    )}
-                  </div>
+          <div className="col-md-4" key={blog._id}>
+
+            <div className="card h-100 shadow-sm">
+
+            {blog.image && (
+                <img
+                  src={blog.image}
+                  alt={blog.title}
+                  className="card-img-top"
+                  style={{ height: "200px", objectFit: "cover" }}
+                />
+              )}
+
+              <div className="card-body d-flex flex-column">
+                <h5 className="card-title">{blog.title}</h5>
+                <p className="card-text text-truncate">{blog.content}</p>
+                <div className="mt-auto d-flex justify-content-between">
+                  
+                  <button
+                    className="btn btn-outline-primary btn-sm"
+                    onClick={() => navigate(`/blogs/${blog._id}`)}
+                  >
+                    👁 View
+                  </button>
+
+                  {isOwner(blog) && (
+                    <div>
+                      <button
+                        className="btn btn-outline-success btn-sm me-2"
+                        onClick={() => navigate(`/editblog/${blog._id}`)}
+                      >
+                        ✏️ Edit
+                      </button>
+
+                      <button
+                        className="btn btn-outline-danger btn-sm"
+                        onClick={() => handleDelete(blog._id)}
+                      >
+                        🗑 Delete
+                      </button>
+
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
-          );
-        })}
+          </div>
+        ))}
       </div>
     </div>
   );

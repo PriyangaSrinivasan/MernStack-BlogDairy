@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { googlelogin } from "../Redux/slices/AuthSlice";
 import { useNavigate } from "react-router-dom";
+  import { API_AUTH } from "../api/config";
 
 const GoogleAuth = () => {
   const dispatch = useDispatch();
@@ -21,13 +22,18 @@ const GoogleAuth = () => {
       console.log("Decoded:", decoded);
 
       // Send token to backend
-      const res = await axios.post(
-        "http://localhost:5000/api/auth/google",
-        { token }, // must be an object with key "token"
-        { headers: { "Content-Type": "application/json" } },
-      );
+      // const res = await axios.post(
+      //   "http://localhost:5000/api/auth/google",
+      //   { token }, // must be an object with key "token"
+      //   { headers: { "Content-Type": "application/json" } },
+      // );
 
-      // console.log("Backend response:", res.data);
+
+    const res = await axios.post(
+     `${API_AUTH}/google`,
+  { token },
+  { headers: { "Content-Type": "application/json" } }
+   );
 
       dispatch(
         googlelogin({

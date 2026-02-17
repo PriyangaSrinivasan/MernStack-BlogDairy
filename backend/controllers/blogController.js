@@ -1,15 +1,19 @@
 const Blog = require("../models/blogModel")
 
 
-        // Create Blog
+     // Create Blog
 const createBlog = async(req,res)=>{
     try {
             let imagePath = "";
 
     // ✅ If an image is uploaded via multer
+    // if (req.file) {
+    //   imagePath = `/uploads/${req.file.filename}`; // store path as string
+    // }
     if (req.file) {
-      imagePath = `/uploads/${req.file.filename}`; // store path as string
-    }
+      imagePath = req.file.path;  // Cloudinary gives full image URL
+  }
+
     // ✅ If user gives direct image URL
     else if (req.body.image) {
       imagePath = req.body.image; // store URL as string
@@ -28,6 +32,7 @@ const createBlog = async(req,res)=>{
         res.status(500).json({message:"Server error",error:error.message})
     }
 };
+
 
         // Get All Blogs
 const getBlogs = async(req,res)=>{

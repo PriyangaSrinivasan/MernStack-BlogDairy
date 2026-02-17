@@ -4,4 +4,4 @@ export const API_COMMENT = import.meta.env.VITE_API_COMMENT;
 export const API_LIKE = import.meta.env.VITE_API_LIKE;
 
 // src/api/config.js
-export const GOOGLE_CLIENT_ID = "337609336290-fk909vnl13jhip6o3ipo5rjr8roi8sol.apps.googleusercontent.com";
+export const GOOGLE_CLIENT_ID ="523490895649-3kakq8eapkrf72l1rt87k7v3ing74dio.apps.googleusercontent.com"

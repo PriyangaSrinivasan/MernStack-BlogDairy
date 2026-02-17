@@ -8,7 +8,7 @@ import {
   addComment,
   editComment,
   deleteComment,
-} from "../../Redux/slices/BlogSlice";
+} from "../../Redux/slices/blogSlice";
 
 const BlogDetails = () => {
   const { id } = useParams();
@@ -93,14 +93,15 @@ const BlogDetails = () => {
       <div className="card shadow p-4">
         <h2 className="mb-3 text-primary">{blog.title}</h2>
 
-        {blog.image && (
-          <img
-            src={`${import.meta.env.VITE_API_URL}${blog.image}`}
-            alt={blog.title}
-            className="img-fluid rounded mb-3"
-            style={{ maxHeight: "400px", objectFit: "cover" }}
-          />
-        )}
+    {blog.image && (
+        <img
+          src={blog.image}
+          alt={blog.title}
+          className="img-fluid rounded mb-3"
+          style={{ maxHeight: "400px", objectFit: "cover" }}
+        />
+      )}
+
 
         <p className="lead" style={{ whiteSpace: "pre-line" }}>
           {blog.content}
