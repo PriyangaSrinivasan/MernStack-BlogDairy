@@ -68,7 +68,9 @@ exports.sendMessage = async (req, res) => {
     await newContact.save();
 
     const transporter = nodemailer.createTransport({
-      service: "gmail",
+      host: "smtp.gmail.com",  // 👈 replace service:"gmail"
+      port: 465,               // 👈 add this
+      secure: true,
       auth: {
         user: process.env.EMAIL_USER,
         pass: process.env.EMAIL_PASS,
