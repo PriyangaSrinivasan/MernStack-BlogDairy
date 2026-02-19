@@ -1,7 +1,32 @@
-const Contact = require("../models/contactModel");
-const sendEmail = require("../utils/sendEmail");
+// const Contact = require("../models/contactModel");
+// const sendEmail = require("../utils/sendEmail");
+
+// exports.sendMessage = async (req, res) => {
+//   const { name, email, message } = req.body;
+
+//   if (!name || !email || !message) {
+//     return res.status(400).json({ message: "All fields required" });
+//   }
+
+//   try {
+//     const newContact = new Contact({ name, email, message });
+//     await newContact.save();
+
+//     await sendEmail({ name, email, message });
+
+//     res.status(201).json({
+//       message: "Message sent & email delivered",
+//     });
+//   } catch (error) {
+//     console.error("CONTACT ERROR:", error);
+//     res.status(500).json({ message: "Email failed" });
+//   }
+// };
 
 exports.sendMessage = async (req, res) => {
+  console.log("Contact route hit");
+  console.log("Request body:", req.body);
+
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -9,16 +34,23 @@ exports.sendMessage = async (req, res) => {
   }
 
   try {
+    console.log("Saving to DB...");
+
     const newContact = new Contact({ name, email, message });
     await newContact.save();
 
-    await sendEmail({ name, email, message });
+    console.log("Saved successfully");
 
-    res.status(201).json({
-      message: "Message sent & email delivered",
+    return res.status(201).json({
+      message: "Message saved successfully",
     });
+
   } catch (error) {
     console.error("CONTACT ERROR:", error);
-    res.status(500).json({ message: "Email failed" });
+    return res.status(500).json({
+      message: "Server error",
+      error: error.message
+    });
   }
 };
+
