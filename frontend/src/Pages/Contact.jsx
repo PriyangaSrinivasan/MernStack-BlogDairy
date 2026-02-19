@@ -1,6 +1,8 @@
 
 import React, { useState } from "react";
 import axios from "axios";
+import { sendContactMessage } from "../api/contact";
+
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -18,10 +20,7 @@ const Contact = () => {
     e.preventDefault();
     try {
       setSending(true);
-      const res = await axios.post(
-        "https://mernstack-blogdairy.onrender.com/api/contact",
-        formData
-      );
+       const res = await sendContactMessage(formData);
       alert(res.data.message);
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
