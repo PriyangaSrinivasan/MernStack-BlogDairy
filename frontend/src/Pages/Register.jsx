@@ -1,9 +1,8 @@
+
 import React, { useState } from "react";
-import BubbleBackground from "../Components/Bubblebg";
 import { registerUser } from "../Redux/slices/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import GoogleAuth from "../OAuth/GoogleAuth";
 
 const Register = () => {
@@ -11,7 +10,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    role: "",
+    role: "user",
   });
 
   const dispatch = useDispatch();
@@ -31,176 +30,140 @@ const Register = () => {
   };
 
   return (
-    <BubbleBackground>
-      <StyledWrapper className="d-flex justify-content-center align-items-center vh-100">
-        <form className="form" onSubmit={handleSubmit}>
-          <h2 className="title">Create Account</h2>
+    <div
+      className="min-vh-100 d-flex align-items-center justify-content-center py-5"
+      style={{ background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)" }}
+    >
+      <div className="container" style={{ maxWidth: "460px" }}>
 
-          <div className="flex-column">
-            <label>Name</label>
-          </div>
-          <div className="inputForm">
-            <input
-              type="text"
-              name="name"
-              className="input"
-              placeholder="Enter your name"
-              value={form.name}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="flex-column">
-            <label>Email</label>
-          </div>
-          <div className="inputForm">
-            <input
-              type="email"
-              name="email"
-              className="input"
-              placeholder="Enter your email"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="flex-column">
-            <label>Password</label>
-          </div>
-          <div className="inputForm">
-            <input
-              type="password"
-              name="password"
-              className="input"
-              placeholder="Create a password"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="flex-column">
-            <label>Role</label>
-          </div>
-          <div className="inputForm">
-            <select
-              name="role"
-              className="input"
-              value={form.role}
-              onChange={handleChange}
-            >
-              <option value="user">User</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-
-          {/* Submit Button */}
-          <button className="button-submit" type="submit" disabled={loading}>
-            {loading ? "Registering..." : "Register"}
-          </button>
-
-          {error && <p className="p text-danger">{error}</p>}
-
-          <p className="p line">Or Register With</p>
-
-          {/* Google Auth Button */}
-          <GoogleAuth />
-
-          <p className="p">
-            Already have an account?{" "}
-            <Link to="/login" className="span">
-              Login
-            </Link>
+        {/* Header */}
+        <div className="text-center mb-4">
+          <h2 className="fw-bold text-white mb-1">Create Account 🚀</h2>
+          <p className="small" style={{ color: "#a89fc4" }}>
+            Join us today and start sharing your stories
           </p>
-        </form>
-      </StyledWrapper>
-    </BubbleBackground>
+        </div>
+
+        {/* Card */}
+        <div
+          className="card border-0 rounded-4 shadow-lg"
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <div className="card-body p-4 p-md-5">
+
+            <form onSubmit={handleSubmit}>
+
+              {/* Name */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold text-white">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  className="form-control rounded-3 border-0 text-white"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  placeholder="Enter your name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Email */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold text-white">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control rounded-3 border-0 text-white"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Password */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold text-white">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control rounded-3 border-0 text-white"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  placeholder="Create a password"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Role */}
+              <div className="mb-4">
+                <label className="form-label fw-semibold text-white">Role</label>
+                <select
+                  name="role"
+                  className="form-select rounded-3 border-0 text-white"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  value={form.role}
+                  onChange={handleChange}
+                >
+                  <option value="user" style={{ background: "#302b63" }}>User</option>
+                  <option value="admin" style={{ background: "#302b63" }}>Admin</option>
+                </select>
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div className="alert alert-danger rounded-3 py-2 text-center small mb-3">
+                  {error}
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="btn btn-primary w-100 rounded-3 py-2 fw-semibold mb-3"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" />
+                    Registering...
+                  </>
+                ) : (
+                  "Register"
+                )}
+              </button>
+
+              {/* Divider */}
+              <div className="d-flex align-items-center gap-2 mb-3">
+                <hr className="flex-grow-1" style={{ border: "1px solid rgba(255,255,255,0.1)" }} />
+                <span className="small" style={{ color: "#7a6a9a" }}>Or register with</span>
+                <hr className="flex-grow-1" style={{ border: "1px solid rgba(255,255,255,0.1)" }} />
+              </div>
+
+              {/* Google Auth */}
+              <GoogleAuth />
+
+            </form>
+          </div>
+        </div>
+
+        {/* Login link */}
+        <p className="text-center mt-3 small" style={{ color: "#a89fc4" }}>
+          Already have an account?{" "}
+          <Link to="/login" className="fw-semibold" style={{ color: "#c4aeff" }}>
+            Login
+          </Link>
+        </p>
+
+      </div>
+    </div>
   );
 };
 
 export default Register;
-
-/* ------------------ Styled Components ------------------ */
-
-const StyledWrapper = styled.div`
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: linear-gradient(45deg, skyblue, darkblue);
-    padding: 30px;
-    width: 450px;
-    border-radius: 20px;
-    transition: background 0.3s ease;
-  }
-
-  .form:hover {
-    background: linear-gradient(45deg, darkblue, skyblue);
-  }
-
-  .title {
-    text-align: center;
-    color: white;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  label {
-    color: white;
-    font-weight: 600;
-  }
-
-  .inputForm {
-    border: 1.5px solid #ecedec;
-    border-radius: 10em;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    background-color: white;
-  }
-
-  .input {
-    border: none;
-    width: 100%;
-    height: 100%;
-    margin-left: 10px;
-    border-radius: 10rem;
-  }
-
-  .input:focus {
-    outline: none;
-  }
-
-  .button-submit {
-    padding: 12px;
-    border-radius: 10em;
-    border: 2px solid white;
-    background: transparent;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 10px;
-  }
-
-  .button-submit:hover {
-    background: royalblue;
-  }
-
-  .p {
-    text-align: center;
-    color: white;
-  }
-
-  .span {
-    color: yellow;
-    cursor: pointer;
-  }
-
-  .line {
-    margin: 10px 0;
-  }
-`;

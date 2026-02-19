@@ -1,16 +1,12 @@
+
 import React, { useState } from "react";
-import BubbleBackground from "../Components/Bubblebg";
-import { loginUser } from "../Redux/slices/AuthSlice"; // ✅ Use loginUser here
+import { loginUser } from "../Redux/slices/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import GoogleAuth from "../OAuth/GoogleAuth";
 
 const Login = () => {
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
+  const [form, setForm] = useState({ email: "", password: "" });
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,259 +20,115 @@ const Login = () => {
     e.preventDefault();
     dispatch(loginUser(form))
       .unwrap()
-      .then(() => navigate("/")) // Redirect after successful login
+      .then(() => navigate("/"))
       .catch(() => {});
   };
 
   return (
-    <BubbleBackground>
-      <StyledWrapper className="d-flex justify-content-center align-items-center vh-100">
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="flex-column">
-            <label>Email</label>
-          </div>
+    <div
+      className="min-vh-100 d-flex align-items-center justify-content-center py-5"
+      style={{ background: "linear-gradient(135deg, #0f0c29, #302b63, #24243e)" }}
+    >
+      <div className="container" style={{ maxWidth: "460px" }}>
 
-          <div className="inputForm">
-            <input
-              placeholder="Enter your Email"
-              name="email"
-              type="email"
-              className="input"
-              value={form.email}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="flex-column">
-            <label>Password</label>
-          </div>
-
-          <div className="inputForm">
-            <input
-              placeholder="Enter your Password"
-              name="password"
-              type="password"
-              className="input"
-              value={form.password}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <button className="button-submit" type="submit" disabled={loading}>
-            {loading ? "Logging in..." : "Sign In"}
-          </button>
-
-          {error && <p className="p text-danger">{error}</p>}
-
-          <p className="p line">Or With</p>
-
-          {/* Google Button */}
-          <GoogleAuth />
-
-          <p className="p">
-            Don't have an account?{" "}
-            <Link to="/register" className="span">
-              Register
-            </Link>
+        {/* Header */}
+        <div className="text-center mb-4">
+          <h2 className="fw-bold text-white mb-1">Welcome Back 👋</h2>
+          <p className="small" style={{ color: "#a89fc4" }}>
+            Sign in to continue to your account
           </p>
-        </form>
-      </StyledWrapper>
-    </BubbleBackground>
+        </div>
+
+        {/* Card */}
+        <div
+          className="card border-0 rounded-4 shadow-lg"
+          style={{
+            background: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(12px)",
+          }}
+        >
+          <div className="card-body p-4 p-md-5">
+
+            <form onSubmit={handleSubmit}>
+
+              {/* Email */}
+              <div className="mb-3">
+                <label className="form-label fw-semibold text-white">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  className="form-control rounded-3 border-0 text-white"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  placeholder="Enter your email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Password */}
+              <div className="mb-4">
+                <label className="form-label fw-semibold text-white">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  className="form-control rounded-3 border-0 text-white"
+                  style={{ background: "rgba(255,255,255,0.08)" }}
+                  placeholder="Enter your password"
+                  value={form.password}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+
+              {/* Error */}
+              {error && (
+                <div className="alert alert-danger rounded-3 py-2 text-center small mb-3">
+                  {error}
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                type="submit"
+                className="btn btn-primary w-100 rounded-3 py-2 fw-semibold mb-3"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="spinner-border spinner-border-sm me-2" role="status" />
+                    Logging in...
+                  </>
+                ) : (
+                  "Sign In"
+                )}
+              </button>
+
+              {/* Divider */}
+              <div className="d-flex align-items-center gap-2 mb-3">
+                <hr className="flex-grow-1" style={{ border: "1px solid rgba(255,255,255,0.1)" }} />
+                <span className="small" style={{ color: "#7a6a9a" }}>Or with</span>
+                <hr className="flex-grow-1" style={{ border: "1px solid rgba(255,255,255,0.1)" }} />
+              </div>
+
+              {/* Google Auth */}
+              <GoogleAuth />
+
+            </form>
+          </div>
+        </div>
+
+        {/* Register link */}
+        <p className="text-center mt-3 small" style={{ color: "#a89fc4" }}>
+          Don't have an account?{" "}
+          <Link to="/register" className="fw-semibold" style={{ color: "#c4aeff" }}>
+            Register
+          </Link>
+        </p>
+
+      </div>
+    </div>
   );
 };
 
 export default Login;
-
-/* ------------------ Styled Components ------------------ */
-
-const StyledWrapper = styled.div`
-  .form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    background: linear-gradient(45deg, skyblue, darkblue);
-    padding: 30px;
-    width: 450px;
-    border-radius: 20px;
-    transition: background 0.3s ease;
-  }
-
-  .form:hover {
-    background: linear-gradient(45deg, darkblue, skyblue);
-  }
-
-  .title {
-    text-align: center;
-    color: white;
-    font-weight: 700;
-    margin-bottom: 10px;
-  }
-
-  label {
-    color: white;
-    font-weight: 600;
-  }
-
-  .inputForm {
-    border: 1.5px solid #ecedec;
-    border-radius: 10em;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    padding-left: 10px;
-    background-color: white;
-  }
-
-  .input {
-    border: none;
-    width: 100%;
-    height: 100%;
-    margin-left: 10px;
-    border-radius: 10rem;
-  }
-
-  .input:focus {
-    outline: none;
-  }
-
-  .button-submit {
-    padding: 12px;
-    border-radius: 10em;
-    border: 2px solid white;
-    background: transparent;
-    color: white;
-    font-weight: 600;
-    cursor: pointer;
-    transition: 0.3s ease;
-    margin-top: 10px;
-  }
-
-  .button-submit:hover {
-    background: royalblue;
-  }
-
-  .p {
-    text-align: center;
-    color: white;
-  }
-
-  .span {
-    color: yellow;
-    cursor: pointer;
-  }
-
-  .line {
-    margin: 10px 0;
-  }
-`;
-
-// import React, { useState } from "react";
-// import axios from "axios";
-// import { GoogleLogin } from "@react-oauth/google";
-// import {jwtDecode} from "jwt-decode";
-
-// const Login = () => {
-//   const [email, setEmail] = useState("");
-//   const [password, setPassword] = useState("");
-
-//   // ===================== EMAIL / PASSWORD LOGIN =====================
-//   const handleLogin = async (e) => {
-//     e.preventDefault();
-//     try {
-//       const res = await axios.post(
-//         "http://localhost:5000/api/auth/login",
-//         { email, password },
-//         { headers: { "Content-Type": "application/json" } }
-//       );
-
-//       console.log("Login response:", res.data);
-
-//       // Save token & user info
-//       localStorage.setItem("token", res.data.token);
-//       localStorage.setItem("user", JSON.stringify(res.data.user));
-
-//       alert(`Welcome, ${res.data.user.name}`);
-//     } catch (err) {
-//       console.error("Login error:", err);
-//       alert(err.response?.data?.message || "Login failed");
-//     }
-//   };
-
-//   // ===================== GOOGLE LOGIN =====================
-//   const handleGoogleSuccess = async (credentialResponse) => {
-//     try {
-//       const token = credentialResponse.credential;
-//       console.log("Google ID Token:", token);
-
-//       // Optional decode for frontend
-//       const decoded = jwtDecode(token);
-//       console.log("Decoded:", decoded);
-
-//       const res = await axios.post(
-//         "http://localhost:5000/api/auth/google",
-//         { token },
-//         { headers: { "Content-Type": "application/json" } }
-//       );
-
-//       console.log("Backend response:", res.data);
-
-//       // Save backend JWT & user info
-//       localStorage.setItem("token", res.data.token);
-//       localStorage.setItem("user", JSON.stringify(res.data.user));
-
-//       alert(`Welcome, ${res.data.user.name} (Google)`);
-//     } catch (err) {
-//       console.error("Google login failed:", err);
-//       alert(err.response?.data?.message || "Google login failed");
-//     }
-//   };
-
-//   const handleGoogleError = () => {
-//     console.error("Google login failed");
-//     alert("Google login failed");
-//   };
-
-//   return (
-//     <div style={{ maxWidth: "400px", margin: "50px auto" }}>
-//       <h2>Login</h2>
-//       <form onSubmit={handleLogin}>
-//         <div>
-//           <label>Email:</label>
-//           <input
-//             type="email"
-//             value={email}
-//             onChange={(e) => setEmail(e.target.value)}
-//             required
-//             style={{ width: "100%", marginBottom: "10px" }}
-//           />
-//         </div>
-//         <div>
-//           <label>Password:</label>
-//           <input
-//             type="password"
-//             value={password}
-//             onChange={(e) => setPassword(e.target.value)}
-//             required
-//             style={{ width: "100%", marginBottom: "10px" }}
-//           />
-//         </div>
-//         <button type="submit" style={{ width: "100%" }}>
-//           Login
-//         </button>
-//       </form>
-
-//       <hr style={{ margin: "20px 0" }} />
-
-//       <div>
-//         <GoogleLogin
-//           onSuccess={handleGoogleSuccess}
-//           onError={handleGoogleError}
-//         />
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Login;
