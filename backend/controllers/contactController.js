@@ -53,6 +53,10 @@
 //   }
 // };
 
+const Contact = require("../models/contactModel");  
+const nodemailer = require("nodemailer");             
+
+
 exports.sendMessage = async (req, res) => {
   const { name, email, message } = req.body;
 
