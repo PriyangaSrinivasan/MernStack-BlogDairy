@@ -24,9 +24,6 @@
 // };
 
 exports.sendMessage = async (req, res) => {
-  console.log("Contact route hit");
-  console.log("Request body:", req.body);
-
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -34,22 +31,17 @@ exports.sendMessage = async (req, res) => {
   }
 
   try {
-    console.log("Saving to DB...");
-
     const newContact = new Contact({ name, email, message });
     await newContact.save();
 
-    console.log("Saved successfully");
-
     return res.status(201).json({
-      message: "Message saved successfully",
+      message: "Message sent successfully",
     });
 
   } catch (error) {
     console.error("CONTACT ERROR:", error);
     return res.status(500).json({
       message: "Server error",
-      error: error.message
     });
   }
 };
