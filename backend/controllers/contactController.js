@@ -23,7 +23,11 @@
 //   }
 // };
 
+const Contact = require("../models/contactModel");
+
 exports.sendMessage = async (req, res) => {
+  console.log("Contact route hit");
+
   const { name, email, message } = req.body;
 
   if (!name || !email || !message) {
@@ -34,14 +38,17 @@ exports.sendMessage = async (req, res) => {
     const newContact = new Contact({ name, email, message });
     await newContact.save();
 
+    console.log("Saved successfully");
+
     return res.status(201).json({
-      message: "Message sent successfully",
+      message: "Message saved successfully",
     });
 
   } catch (error) {
     console.error("CONTACT ERROR:", error);
     return res.status(500).json({
       message: "Server error",
+      error: error.message,
     });
   }
 };
