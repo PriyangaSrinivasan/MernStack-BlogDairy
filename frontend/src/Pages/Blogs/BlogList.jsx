@@ -233,7 +233,6 @@
 // };
 
 // export default BlogList;
-
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchBlogs, deleteBlog } from "../../Redux/slices/BlogSlice";
@@ -390,20 +389,15 @@ const BlogList = () => {
     return user && (user.role === "admin" || String(userId) === String(authorId));
   };
 
-// ✅ fixed - case insensitive for both search and category
-const filtered = blogs.filter((blog) => {
-  const matchSearch =
-    search === "" ||
-    blog.title?.toLowerCase().includes(search.toLowerCase()) ||
-    blog.content?.toLowerCase().includes(search.toLowerCase()) ||
-    blog.author?.name?.toLowerCase().includes(search.toLowerCase());
-
-  const matchCategory =
-    activeCategory === "All" ||
-    blog.category?.toLowerCase().trim() === activeCategory.toLowerCase().trim();
-
-  return matchSearch && matchCategory;
-});
+  /* ── Filter logic ── */
+  const filtered = blogs.filter((blog) => {
+    const matchSearch =
+      blog.title?.toLowerCase().includes(search.toLowerCase()) ||
+      blog.content?.toLowerCase().includes(search.toLowerCase());
+    const matchCategory =
+      activeCategory === "All" || blog.category === activeCategory;
+    return matchSearch && matchCategory;
+  });
 
   if (loading) return (
     <div className="d-flex align-items-center justify-content-center min-vh-100"

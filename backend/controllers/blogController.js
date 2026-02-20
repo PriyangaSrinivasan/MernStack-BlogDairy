@@ -6,10 +6,7 @@ const createBlog = async(req,res)=>{
     try {
             let imagePath = "";
 
-    // ✅ If an image is uploaded via multer
-    // if (req.file) {
-    //   imagePath = `/uploads/${req.file.filename}`; // store path as string
-    // }
+  
     if (req.file) {
       imagePath = req.file.path;  // Cloudinary gives full image URL
   }
@@ -22,7 +19,7 @@ const createBlog = async(req,res)=>{
             title:req.body.title,
             content:req.body.content,
             category:req.body.category,
-            author:req.user._id,
+            author: req.user._id || req.user.id,
              image: imagePath 
         })
         const savedBlog =  await newBlog.save();
