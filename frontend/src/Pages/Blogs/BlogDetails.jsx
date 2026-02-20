@@ -673,7 +673,10 @@ const BlogDetails = () => {
   if (!blog) return null;
 
   const isOwner = user && (user.role === "admin" || String(user._id || user.id) === String(blog.author?._id || blog.author));
-  const userLiked = blog.likes?.includes(user?._id || user?.id);
+      const userId = String(user?._id || user?.id);
+      const userLiked = blog.likes?.some(like => 
+        String(like.user?._id || like.user || like) === userId
+      );
   const authorInitial = (blog.author?.name || "U")[0].toUpperCase();
 
   const handleDeleteBlog = () => {

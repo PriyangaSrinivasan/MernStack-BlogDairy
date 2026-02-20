@@ -286,13 +286,15 @@ const EditBlog = () => {
   }, [singleBlog]);
 
   useEffect(() => {
-    if (!user || !singleBlog) return;
-    const authorId = singleBlog.author?._id || singleBlog.author;
-    if (user.role !== "admin" && String(user._id) !== String(authorId)) {
-      alert("You are not authorized to edit this blog.");
-      navigate("/blogs");
-    }
-  }, [singleBlog, user, navigate]);
+  if (!user || !singleBlog) return;
+  const authorId = String(singleBlog.author?._id || singleBlog.author);
+  const userId = String(user._id || user.id); // ✅ fix
+
+  if (user.role !== "admin" && userId !== authorId) {
+    alert("You are not authorized to edit this blog.");
+    navigate("/blogs");
+  }
+}, [singleBlog, user, navigate]);
 
   const handleChange = (e) =>
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
