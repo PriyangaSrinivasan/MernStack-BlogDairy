@@ -115,27 +115,6 @@ const updateBlog = async (req, res) => {
   }
 };
 
- 
-                     // Delete Blog
-// const deleteBlog = async(req,res)=>{
-//     try {
-//         const blog = await Blog.findById(req.params.id);
-//          if(!blog) return res.status(404).json({message:"Blog not found"});
-
-         
-
-//         if(req.user.role !== "admin" && blog.author.toString() !==req.user._id.toString()){
-//         return res.status(403).json({message:"Not authorized"})
-//        }
-
-//        await blog.deleteOne();
-//        res.json({message:"Blog deleted successfully" })
-//     } catch (error) {
-//         res.status(500).json({message:"Server error"})
-//     }
-// };
-
-
 const deleteBlog = async (req, res) => {
   try {
     const blog = await Blog.findById(req.params.id);

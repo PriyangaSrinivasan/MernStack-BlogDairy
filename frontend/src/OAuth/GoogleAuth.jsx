@@ -21,14 +21,6 @@ const GoogleAuth = () => {
       const decoded = jwtDecode(token);
       console.log("Decoded:", decoded);
 
-      // Send token to backend
-      // const res = await axios.post(
-      //   "http://localhost:5000/api/auth/google",
-      //   { token }, // must be an object with key "token"
-      //   { headers: { "Content-Type": "application/json" } },
-      // );
-
-
     const res = await axios.post(
      `${API_AUTH}/google`,
   { token },
@@ -54,7 +46,7 @@ const GoogleAuth = () => {
   };
 
   return (
-    <div>
+    <div className="d-flex justify-content-center">
       <GoogleLogin
         onSuccess={handleGoogleSuccess}
         onError={handleGoogleError}
