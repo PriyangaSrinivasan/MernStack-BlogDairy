@@ -394,9 +394,10 @@ const BlogList = () => {
     const matchSearch =
       blog.title?.toLowerCase().includes(search.toLowerCase()) ||
       blog.content?.toLowerCase().includes(search.toLowerCase());
-    const matchCategory =
-      activeCategory === "All" || blog.category === activeCategory;
-    return matchSearch && matchCategory;
+ const matchCategory =
+     activeCategory === "All" ||
+     (blog.category || "General") === activeCategory;
+     return matchSearch && matchCategory; 
   });
 
   if (loading) return (
