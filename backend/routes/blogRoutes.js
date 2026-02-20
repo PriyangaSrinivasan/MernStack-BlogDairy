@@ -44,19 +44,7 @@ const {
   deleteBlog,
 } = require("../controllers/blogController");
 
-// ✅ Temporary fix route — must be BEFORE /:id
-router.get("/fix-categories", async (req, res) => {
-  try {
-    const result = await Blog.updateMany(
-      { category: { $exists: false } },
-      { $set: { category: "General" } }
-    );
-    res.json({ message: "All old blogs fixed!", modifiedCount: result.modifiedCount });
-  } catch (error) {
-    console.error("Fix error:", error.message);
-    res.status(500).json({ message: "Server error", error: error.message });
-  }
-});
+
 
 // 👉 Get all blogs
 router.get("/", getBlogs);
