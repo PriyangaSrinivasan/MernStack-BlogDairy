@@ -10,7 +10,7 @@ const dark   = "#030e1c";
 const muted  = "#7a95b0";
 const dimmer = "#4a6080";
 
-const categories = ["All","General" ,"Technology", "Lifestyle", "Travel", "Health", "Food", "Education", "Business"];
+const categories = ["All","Technology", "Lifestyle", "Travel", "Health", "Food", "Education", "Business"];
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 28 },
