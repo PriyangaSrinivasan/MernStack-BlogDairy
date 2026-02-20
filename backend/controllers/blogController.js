@@ -20,7 +20,8 @@ const createBlog = async(req,res)=>{
             content:req.body.content,
             category:req.body.category,
             author: req.user._id || req.user.id,
-             image: imagePath 
+             image: imagePath,
+            category: req.body.category || "General", 
         })
         const savedBlog =  await newBlog.save();
         res.status(201).json(savedBlog);
