@@ -88,7 +88,10 @@ const updateBlog = async (req, res) => {
       ? blog.author._id.toString()
       : blog.author.toString();
 
-    const userId = req.user._id.toString();
+    // const userId = req.user._id.toString();
+
+    // ✅ handle both id and _id
+    const userId = (req.user._id || req.user.id).toString();
 
     // 🔐 Authorization check
     if (req.user.role !== "admin" && authorId !== userId) {
@@ -116,20 +119,45 @@ const updateBlog = async (req, res) => {
 
  
                      // Delete Blog
-const deleteBlog = async(req,res)=>{
-    try {
-        const blog = await Blog.findById(req.params.id);
-         if(!blog) return res.status(404).json({message:"Blog not found"});
+// const deleteBlog = async(req,res)=>{
+//     try {
+//         const blog = await Blog.findById(req.params.id);
+//          if(!blog) return res.status(404).json({message:"Blog not found"});
 
-        if(req.user.role !== "admin" && blog.author.toString() !==req.user._id.toString()){
-        return res.status(403).json({message:"Not authorized"})
-       }
+         
 
-       await blog.deleteOne();
-       res.json({message:"Blog deleted successfully" })
-    } catch (error) {
-        res.status(500).json({message:"Server error"})
+//         if(req.user.role !== "admin" && blog.author.toString() !==req.user._id.toString()){
+//         return res.status(403).json({message:"Not authorized"})
+//        }
+
+//        await blog.deleteOne();
+//        res.json({message:"Blog deleted successfully" })
+//     } catch (error) {
+//         res.status(500).json({message:"Server error"})
+//     }
+// };
+
+
+const deleteBlog = async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) return res.status(404).json({ message: "Blog not found" });
+
+    const authorId = blog.author._id
+      ? blog.author._id.toString()
+      : blog.author.toString();
+
+    const userId = (req.user._id || req.user.id).toString(); // ✅
+
+    if (req.user.role !== "admin" && authorId !== userId) { // ✅ use the fixed variables
+      return res.status(403).json({ message: "Not authorized" });
     }
+
+    await blog.deleteOne();
+    res.json({ message: "Blog deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: "Server error" });
+  }
 };
 
-module.exports ={createBlog,getBlogById,getBlogs,updateBlog,deleteBlog}
+ module.exports ={createBlog,getBlogById,getBlogs,updateBlog,deleteBlog}
